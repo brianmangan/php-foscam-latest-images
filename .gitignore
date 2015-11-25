@@ -1,16 +1,29 @@
-# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
 
+# IntelliJ project files
+.idea
 *.iml
+out
+gen### JDeveloper template
+# default application storage directory used by the IDE Performance Cache feature
+.data/
 
-## Directory-based project format:
-.idea/
+# used for ADF styles caching
+temp/
+
+# default output directories
+classes/
+deploy/
+javadoc/
+
 # if you remove the above rule, at least ignore the following:
 
 # User-specific stuff:
 # .idea/workspace.xml
 # .idea/tasks.xml
 # .idea/dictionaries
-# .idea/shelf
 
 # Sensitive or high-churn files:
 # .idea/dataSources.ids
@@ -45,4 +58,20 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
-fabric.properties
+
+junitvmwatcher*.properties
+build.properties
+
+# generated java classes and java source files
+#   manually add any custom artifacts that can't be generated from the models
+#   http://confluence.jetbrains.com/display/MPSD25/HowTo+--+MPS+and+Git
+classes_gen
+source_gen
+source_gen.caches
+
+# generated test code and test results
+test_gen
+test_gen.caches
+TEST-*.xml
+junit*.properties
+
