@@ -1,0 +1,4 @@
+ExpiresActive on
+ExpiresDefault "access plus 0 seconds"
+RewriteEngine On
+RewriteRule ^sample.jpg$ image.php [NC,L]
