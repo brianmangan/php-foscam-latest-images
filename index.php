@@ -6,7 +6,7 @@ $latest_ctime = 0;
 $latest_filename = '';
 $latest_filepath = '';
 $d = dir($path);
-$log = '';
+$log = '<strong>Log Start: </strong>' . microtime() ;
 
 while (false !== ($entry = $d->read())) {
     $filepath = "{$path}/{$entry}";
@@ -18,46 +18,49 @@ while (false !== ($entry = $d->read())) {
 
     }
     if (is_file($filepath) && $latest_filepath != $filepath  && !strpos($filepath, "php") && !strpos($filepath, "htaccess")) {
-        $log .= "<p>Deleting: $filepath </p>";
+        $log .= "<br>Deleted: <code>$filepath</code>";
         unlink($filepath);
     }
 }
-
-
-
-
-//print_r(gd_info());
-//echo $filepath;
-//echo "<p>";
-//print_r(getimagesize($filepath));
-
-echo "<p>Lastest Image:</p><img src=\"$latest_filename\" />";
-
-echo  $latest_filename;
-
-// Show all information, defaults to INFO_ALL
-//phpinfo();
-
 ?><!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script type="javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script type="javascript" src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
 
 <div class="container-fluid">
-    <h2>Simple Collapsible</h2>
-    <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">Simple collapsible</button>
-    <div id="demo" class="collapse in">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    <div class="row">
+        <div class="col-md-8">
+            <div>
+                <img src="<? echo $latest_filename; ?>" style="width: 100%;"/>
+            </div>
+            <div>
+                <strong>Image Details: </strong><? print_r(getimagesize($latest_filepath)); ?>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h3>Details...</h3>
+            <p><strong>File Name: </strong><? echo  $latest_filename; ?></p>
+            <p><strong>File Time: </strong><? echo  $latest_ctime; ?></p>
+            <p style="word-wrap: break-word;"><strong>File Path: </strong><? echo  $latest_filepath; ?></p>
+            <h3>Logs <button type="button" class="btn btn-info" id="btnLogs">View</button></h3>
+            <div class="collapse" id="logs" style="word-break: break-all;">
+                <? echo $log ?>
+            </div>
+        </div>
     </div>
 </div>
-
+<script>
+    $(document).ready(function(){
+        $("#btnLogs").click(function(){
+            $("#logs").collapse('toggle');
+        });
+    });
+</script>
 </body>
 </html>
 
